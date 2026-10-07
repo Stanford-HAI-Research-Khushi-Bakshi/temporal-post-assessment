@@ -2,6 +2,7 @@
 
 Captured from the local prototype on October 6, 2026. All clients and phone numbers are fictional; no real messages were sent.
 
+- [Refined interface](prototype-polished.png): updated typography, ivory/sage palette, botanical sidebar and clearer offer status. Layout and forms checked at mobile and desktop sizes.
 - [Confirmed booking](prototype-confirmed.png): Alex timed out, Sam accepted, and the queue records both outcomes.
 - [Failed message](failed-message.png): delivery failure pauses outreach and exposes explicit staff phone outcomes.
 - [Temporal workflow](temporal-workflow.png): real `juniper-salon-v2` coordinator, Running status, Signals, message Activities and durable timers. The coordinator stays Running to serve future openings; individual outcomes appear in the app.
