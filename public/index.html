@@ -1,33 +1,35 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Temporal assessment starter</title>
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <main>
-      <p class="eyebrow">Temporal assessment starter</p>
-      <h1>Your environment is connected.</h1>
-      <p class="intro">
-        This neutral demonstration starts a Workflow, waits durably for a
-        Signal, and then completes. Replace it with the experience your
-        customer needs.
-      </p>
-      <section class="card">
-        <h2 id="phase">Ready</h2>
-        <p id="message">Start the demonstration to verify the setup.</p>
-        <button id="start">Start demo Workflow</button>
-        <button id="continue" hidden>Send continue Signal</button>
-        <p class="request-id" id="request-id"></p>
-      </section>
-      <p class="footer">
-        Inspect the execution at
-        <a href="http://localhost:8233" target="_blank">localhost:8233</a>.
-      </p>
-    </main>
-    <script src="/app.js"></script>
-  </body>
-</html>
-
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Juniper Salon · Front desk</title><link rel="stylesheet" href="/styles.css"></head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Juniper Salon home"><span class="brand-icon">j<span>✳</span></span><span>juniper<small>NEIGHBORHOOD SALON</small></span></a>
+    <div class="workspace-label">YOUR WORKSPACE</div>
+    <nav aria-label="Main navigation"><button class="nav-item active" data-view="board"><span>▦</span> Front desk</button><button class="nav-item" data-view="waitlist"><span>☷</span> Waitlist</button><button class="nav-item" data-view="activity"><span>◷</span> Activity</button></nav>
+    <div class="sidebar-bottom"><div class="leaf-art" aria-hidden="true">✳</div><p>A little less admin.<br>A little more salon.</p><div class="staff"><span class="avatar">L</span><label>Working as<select id="actor" aria-label="Staff member"><option>Lena</option><option>Carla</option></select></label></div></div>
+  </aside>
+  <main>
+    <header class="topbar"><span>JUNIPER / <strong id="page-name">FRONT DESK</strong></span><span id="connection" class="connection"><i></i> Connecting…</span></header>
+    <div class="content">
+      <div class="page-heading"><div><div class="eyebrow" id="today-label"></div><h1 id="page-title">Every opening is an opportunity.</h1><p id="page-subtitle">Keep the chair filled. Give each client their turn.</p></div><button class="button primary" id="new-opening">＋ New opening</button></div>
+      <div class="prototype-note"><span class="pill">LOCAL PROTOTYPE</span> Sample clients & simulated messages. Existing bookings are updated in Square by staff.</div>
+      <div id="service-error" role="alert" hidden></div>
+      <section id="stats" class="stats" aria-label="Salon summary"></section>
+      <section id="demo-strip" class="demo-strip"><div><span class="demo-star">✦</span><strong>Try a salon scenario</strong><small>Short timers, real durable waits.</small></div><div class="demo-buttons"><button data-demo="timeout">Timeout → next client <span>20s</span></button><button data-demo="failure">Failed message</button><button data-demo="overlap">Overlapping offers</button></div></section>
+      <div id="screen"><div class="loading-card">Connecting to your saved front desk…</div></div>
+      <footer><span>Offers keep moving when you close this page.</span><a id="temporal-link" href="http://localhost:8233" target="_blank" rel="noreferrer">View workflow history ↗</a></footer>
+    </div>
+  </main>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="opening-dialog"><form id="opening-form"><div class="dialog-heading"><div class="eyebrow">FILL AN EMPTY CHAIR</div><h2>New opening</h2><p>We’ll match eligible clients and contact them in waitlist order.</p></div><div class="form-grid">
+    <label>Service<select name="service"><option>Haircut</option><option>Color</option><option>Blowout</option></select></label><label>Stylist<select name="stylist"><option>Maya</option><option>Noor</option></select></label>
+    <label>Appointment starts<input name="startAt" type="datetime-local" required></label><label>Duration<select name="durationMinutes"><option value="30">30 minutes</option><option value="60" selected>60 minutes</option><option value="90">90 minutes</option><option value="120">120 minutes</option></select></label>
+    <label>Stop accepting at<input name="stopAt" type="datetime-local" required></label><label>Reply window<select name="responseSeconds"><option value="900">15 minutes · salon pace</option><option value="20">20 seconds · demo pace</option><option value="120">2 minutes · demo pace</option></select></label>
+  </div><p class="form-note">The cutoff always wins—even if a client has less than their full reply window left. Times use your browser’s local timezone.</p><label class="checkbox"><input name="simulateFailure" type="checkbox"> Simulate a failed first message</label><p class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button quiet" data-close="opening-dialog">Cancel</button><button type="submit" class="button primary">Create & start outreach</button></div></form></dialog>
+  <dialog id="client-dialog"><form id="client-form"><div class="dialog-heading"><div class="eyebrow">AN EARLIER APPOINTMENT</div><h2>Add to the waitlist</h2><p>New clients join at the end of the queue for future openings.</p></div><div class="form-grid">
+    <label>Client name<input name="name" maxlength="60" required placeholder="e.g. Casey Taylor"></label><label>Mobile number<input name="phone" type="tel" required placeholder="+1 (415) 555-0123"></label>
+    <label>Requested service<select name="service"><option>Haircut</option><option>Color</option><option>Blowout</option></select></label><label>Preferred stylist<select name="stylist"><option value="Any">Any stylist</option><option>Maya</option><option>Noor</option></select></label>
+    <label>Available from<input name="availableFrom" type="datetime-local" required></label><label>Available until<input name="availableTo" type="datetime-local" required></label>
+  </div><p class="form-note">For this prototype, availability is one continuous date/time range. An appointment must fit entirely inside it.</p><p class="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="button quiet" data-close="client-dialog">Cancel</button><button type="submit" class="button primary">Add client</button></div></form></dialog>
+  <script src="/app.js"></script>
+</body></html>
