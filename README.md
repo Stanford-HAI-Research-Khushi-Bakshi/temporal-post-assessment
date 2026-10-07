@@ -70,6 +70,10 @@ npm test
 
 Tests cover matching, exact timeout boundaries, stale/duplicate accepts, cross-opening conflicts, failed sends and manual decisions, cutoff while paused, explicit reopening, queue preservation, staff closure outcomes, exhausted queues, idempotency, and Temporal timers/activities with worker recovery. The Temporal test uses a downloaded ephemeral test server and requires internet on its first run, but not Docker.
 
+## Presentation for Lena
+
+The [five-slide standalone PDF](output/pdf/juniper-salon-presentation.pdf) covers Lena's problem, the prototype's behavior, simulated and excluded work, and a proposed next step. It includes three actual website screenshots with fictional clients. The [editable PowerPoint version](output/presentation/juniper-salon-presentation.pptx) includes speaker notes for an approximately nine-minute walkthrough.
+
 ## Visual direction
 
 Lena did not specify brand colors, fonts, or a logo during discovery. The deep green, warm ivory and sage palette, botanical illustration and serif headings are proposed design choices for this prototype, not customer requirements.
